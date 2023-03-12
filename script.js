@@ -9,12 +9,16 @@ const searchButton = document.getElementById('searchButton')
 
 const searchInput = document.getElementById('searchInput')
 
+const hname = document.getElementById('hname')
+
+const hstat = document.getElementById('hstat')
+
 const getSuperHero = (id, name) => {
   fetch(`${BASE_URL}/${id}`)
     .then(response => response.json())
     .then(json => {
       console.log(json.powerstats)
-      const superHero = json
+      const superHero = json 
       showHeroInfo(superHero) 
     })
 }
@@ -22,22 +26,23 @@ const getSuperHero = (id, name) => {
 const statToEmoji = {
   intelligence: '🧠',
   strength: '💪',
-  speed: '⚡',
-  durability: '🏋️‍♂️',
-  power: '📊',
+  speed: '🏃',
+  durability: '🛡️',
+  power: '💥',
   combat: '⚔️',
 }
 
 const showHeroInfo = (character) => {
-  const name = `<h2>${character.name}</h2>`
-
-  const img = `<img src="${character.image.url}" height=200 width=200/>`
   
+  const img = `<img src="${character.image.url}" height=200 width=200/>`
+  const name = `<h2>${character.name}</h2>`
   const stats = Object.keys(character.powerstats).map(stat => {
     return `<p>${statToEmoji[stat]} ${stat.toUpperCase()}: ${character.powerstats[stat]}</p>`
   }).join('')
   
-  heroImageDiv.innerHTML = `${name}${img}${stats}`
+  heroImageDiv.innerHTML = `${img}`
+  hname.innerHTML = `${name}`
+  hstat.innerHTML = `${stats}`
 }
 function getSearchSuperHero(name) {
     console.log(searchInput.value)
